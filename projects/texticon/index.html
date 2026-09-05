@@ -1,0 +1,11 @@
+<!DOCTYPE html><html data-astro-cid-qup72gqn> <head><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="utf-8"><title>texticon ∙ Daniel Fernandes</title><link rel="icon" href="/favicon.webp" type="image/webp"><link rel="stylesheet" href="/_astro/DefaultLayout.C8sCrYWj.css"></head> <body data-astro-cid-qup72gqn> <div id="content" data-astro-cid-qup72gqn> <div class="header" data-astro-cid-qup72gqn> <div class="home accented" data-astro-cid-qup72gqn> <a href="/" data-astro-cid-qup72gqn>Daniel Fernandes</a> </div> <div class="links subdued" data-astro-cid-qup72gqn> <a href="/contact" data-astro-cid-qup72gqn>Contact</a> </div> </div>  <h1>texticon</h1>  <p>Install via <a href="https://www.npmjs.com/package/texticon">npm</a>:</p>
+<pre class="astro-code astro-code-themes rose-pine-dawn rose-pine" style="background-color:#faf4ed;--shiki-dark-bg:#191724;color:#575279;--shiki-dark:#e0def4; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D7827E;--shiki-dark:#EBBCBA">npm</span><span style="color:#EA9D34;--shiki-dark:#F6C177"> install</span><span style="color:#EA9D34;--shiki-dark:#F6C177"> texticon</span></span></code></pre>
+<p>texticon is a library I created for <a href="./frost">Frost</a> to display placeholder favicons for shortcuts
+and search engines.</p>
+<p>I made it because I wanted the letters in the icons to be perfectly visually centered. Fonts are not
+normally designed to do that.</p>
+<p>The solution was to use
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/TextMetrics"><code>TextMetrics</code></a> to get a bounding box
+of the text on a canvas, and then translate the text so that it’s centered.</p>
+<p>You can use full CSS font customization, and supply a random seed, so each name always maps to the
+same color.</p>   <div class="footer" data-astro-cid-qup72gqn></div> </div></body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html><html data-astro-cid-qup72gqn> <head><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="utf-8"><title>A Better Phonetic Alphabet ∙ Daniel Fernandes</title><link rel="icon" href="/favicon.webp" type="image/webp"><link rel="stylesheet" href="/_astro/DefaultLayout.C8sCrYWj.css"></head> <body data-astro-cid-qup72gqn> <div id="content" data-astro-cid-qup72gqn> <div class="header" data-astro-cid-qup72gqn> <div class="home accented" data-astro-cid-qup72gqn> <a href="/" data-astro-cid-qup72gqn>Daniel Fernandes</a> </div> <div class="links subdued" data-astro-cid-qup72gqn> <a href="/contact" data-astro-cid-qup72gqn>Contact</a> </div> </div>  <h1>A Better Phonetic Alphabet</h1>  <p>This is a collaboration with <a href="https://www.tomerbraff.com/">Tomer Braff</a> whom I met in the Summer of
+Math Exposition community.</p>
+<p>A phonetic alphabet, also known as a spelling alphabet, is used to distinguish letters when
+spelling out words. Letters are given names, like <strong>A</strong>lfa, <strong>B</strong>ravo, <strong>C</strong>harlie, and so on…</p>
+<p>We wanted to know if there is a combination of words that is even easier to tell apart by their
+pronunciations than those in the standard NATO Phonetic Alphabet.</p>
+<h2 id="phonemes">Phonemes</h2>
+<p>Words are sequences of vowel and consonant sounds. We call these sounds <em>phonemes</em>, they
+are the building blocks of speech.</p>
+<p>The CMU Pronouncing Dictionary provides a large list of words with their pronunciations described in
+phonemes.</p>
+<p>In order to know which set of words sounds the most different from each other, we need to quantify
+how similar two phonemes sound.</p>
+<p>Tomer recorded each phoneme with his voice and created a <a href="https://github.com/Jumplion/Best-Phonetic-Alphabet/tree/0963c1089196a9bab94c59bba715dd45812eaaac/Phoneme%20Voice%20Files">dataset</a> for subsequent similarity analysis.</p>
+<h2 id="how-we-hear">How we hear</h2>
+<p>I used <a href="https://github.com/HearingTechnology/CoNNear_cochlea">CoNNear</a> to simulate how the cochlea
+in our ears would respond to each phoneme sound. Here’s it’s output for the <code>EY</code> phoneme:</p>
+<p><img alt="Audio vs CoNNear output" loading="lazy" decoding="async"  width="947" height="373" src="/_astro/phoneme-similarity-audio-vs-connear.Bb7lYG84_d1ANz.webp" ></p>
+<p>The cochlea in our ears has a tapering basilar membrane. When we hear a sound, different parts of
+this membrane vibrate based on the frequencies present in the sound.</p>
+<p>The thicker parts of this tapering membrane resonate with lower frequencies, while the thinner parts
+resonate with higher frequencies. Indeed, our ears perform an analog version of the Fourier
+Transform for every sound we hear!</p>
+<p>Based on prior research about which frequencies we can tell apart, the model’s frequency axis is
+divided into 201 bins. Across time, each bin oscillates back and forth (blue and red) about its mean
+position (white).</p>
+<p>The benefit of using CoNNear over a DFT is that we can work with a representation that is very close
+to how we perceive sounds.</p>
+<h2 id="creating-a-phoneme-distance-function">Creating a phoneme distance function</h2>
+<p>There are a few different ways we could go about this. Given that phoneme sounds are very short, and
+that they are usually static sounds, I decided to aggregate CoNNear’s output over time. Here are
+the frequency distributions for <code>AA</code>, <code>AE</code>, and <code>L</code> respectively:</p>
+<p><img alt="Frequency distribution for Phoneme AA" loading="lazy" decoding="async"  width="386" height="278" src="/_astro/phoneme-similarity-freq-dist-aa.D2Z8_sKh_ZLG97U.webp" >
+<img alt="Frequency distribution for Phoneme AE" loading="lazy" decoding="async"  width="386" height="278" src="/_astro/phoneme-similarity-freq-dist-ae.CFKOFQEq_tOIIL.webp" >
+<img alt="Frequency distribution for Phoneme L" loading="lazy" decoding="async"  width="386" height="278" src="/_astro/phoneme-similarity-freq-dist-l.3C3pbz3I_n2kKI.webp" ></p>
+<p>Notice how <code>AA</code> and <code>AE</code> have similar looking frequency distributions, while <code>L</code> looks different
+from them.</p>
+<p>If we consider each frequency bin to be a dimension of a vector space, then our frequency
+distributions become 201-dimensional vectors.</p>
+<p>The similarity between two phonemes is then simply the Euclidean distance between their vectors.</p>
+<h2 id="finding-better-phonetic-alphabets">Finding better phonetic alphabets</h2>
+<p>Tomer used this similarity information and the CMU Dictionary to find the most distinct sounding
+alphabet using various graph search algorithms.</p>
+<p>More about that and our results are in his video <a href="https://youtu.be/mt23kXrvRJQ"><em>A Better Phonetic Alphabet?</em></a> which
+became an entry for the Summer of Math Exposition 4.</p>
+<h2 id="closing-words">Closing words</h2>
+<p>Huge thanks to Tomer for encouraging me to take a shot at making this similarity function! I wasn’t
+sure if I could do it, but he said that anything I’d make would be appreciated. These little
+gestures make a huge difference.</p>
+<p>We have some ideas for a follow up. For example, we’d like to consider how a phoneme evolves over
+time in our comparisons, since not all phonemes are truly static. We hope we can share its story
+another time.</p>
+<h2 id="references-and-links">References and Links</h2>
+<p><a href="https://github.com/Jumplion/Best-Phonetic-Alphabet/blob/0963c1089196a9bab94c59bba715dd45812eaaac/connear_notebook.ipynb">Python Notebook</a></p>
+<p><a href="https://arxiv.org/pdf/2004.14832">CoNNear preprint</a></p>   <div class="footer" data-astro-cid-qup72gqn></div> </div></body></html>
